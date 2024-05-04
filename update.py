@@ -16,7 +16,7 @@ def update_file_from_url(url, filename):
     print(f"File downloaded successfully: {filename}")
   except requests.exceptions.RequestException as e:
     print(f"Error downloading file: {e}")
-    
+
   time.sleep(1)
   exec(open("main.pyw").read())
   
@@ -28,4 +28,5 @@ settings_url = "https://raw.githubusercontent.com/Sandstorrm/parental-control/ma
 settings_filename = "settings.json"
 
 update_file_from_url(main_url, filename)
-# update_file_from_url(settings_url, settings_filename)
+time.sleep(1)
+update_file_from_url(settings_url, settings_filename)
