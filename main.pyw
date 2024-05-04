@@ -22,7 +22,7 @@ while True:
     success_delay = settings['success_delay']
     failed_delay = settings['failed_delay']
     failed_command = settings['failed_command']
-    points_file = 'points_file.txt' # settings['points_file']
+    points_file = settings['points_file']
     count = int(Count())
 
     if count >= threshold:
