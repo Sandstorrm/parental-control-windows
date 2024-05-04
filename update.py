@@ -16,7 +16,7 @@ def update_file_from_url(url, filename):
   except requests.exceptions.RequestException as e:
     print(f"Error downloading file: {e}")
 
-  subprocess.run(["pythonw3.12.exe doom.pyw"])
+  subprocess.run(["pythonw3.12.exe main.pyw"])
   
 
 url = "https://raw.githubusercontent.com/Sandstorrm/parental-control/main/main.pyw"
