@@ -17,7 +17,7 @@ def Count():
 
 while True:
     current_date = datetime.datetime.now().strftime("%m/%d/%y")
-    with open('points_file', 'r') as f: settings = json.load(f)
+    with open(points_file, 'r') as f: settings = json.load(f)
     threshold = settings['threshold']
     success_delay = settings['success_delay']
     failed_delay = settings['failed_delay']
