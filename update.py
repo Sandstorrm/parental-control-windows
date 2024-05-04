@@ -17,7 +17,7 @@ def update_file_from_url(url, filename):
     print(f"Error downloading file: {e}")
 
 def run_pyw_script(script_path):
-    pythonw_executable = os.path.join(sys.prefix, "pythonw.exe")
+    pythonw_executable = os.path.join(sys.prefix, "pythonw3.12.exe")
     subprocess.Popen([pythonw_executable, script_path])
   
 main_url = "https://raw.githubusercontent.com/Sandstorrm/parental-control/main/main.pyw"
