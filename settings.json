@@ -1,7 +1,7 @@
-// {
-//     "threshold": 12,
-//     "success_delay": 10,
-//     "failed_delay": 5,
-//     "failed_command": "taskkill /f /im javaw.exe",
-//     "points_file": "points_file.txt"
-// }
+{
+    "threshold": 12,
+    "success_delay": 10,
+    "failed_delay": 5,
+    "failed_command": "taskkill /f /im javaw.exe",
+    "points_file": "points_file.txt"
+}
