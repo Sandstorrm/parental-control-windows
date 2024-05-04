@@ -1,5 +1,5 @@
 {
-    "threshold": 12,
+    "threshold": 1,
     "success_delay": 10,
     "failed_delay": 5,
     "failed_command": "taskkill /f /im javaw.exe",
