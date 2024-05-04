@@ -19,7 +19,11 @@ def update_file_from_url(url, filename):
   exec(open("main.pyw").read())
   
 
-url = "https://raw.githubusercontent.com/Sandstorrm/parental-control/main/main.pyw"
+main_url = "https://raw.githubusercontent.com/Sandstorrm/parental-control/main/main.pyw"
 filename = "main.pyw"
 
-update_file_from_url(url, filename)
+settings_url = "https://raw.githubusercontent.com/Sandstorrm/parental-control/main/settings.json"
+settings_filename = "settings.json"
+
+update_file_from_url(settings_url, settings_filename)
+update_file_from_url(main_url, filename)
