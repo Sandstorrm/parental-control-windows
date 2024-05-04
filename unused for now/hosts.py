@@ -3,6 +3,9 @@ import subprocess
 
 HOSTS_PATH = r"C:\Windows\System32\drivers\etc\hosts"
 
+def clear_screen():
+    os.system('cls' if os.name == 'nt' else 'clear')
+
 def flush_dns():
     try:
         result = subprocess.run(["ipconfig", "/flushdns"], capture_output=True, text=True, check=True)
@@ -10,7 +13,6 @@ def flush_dns():
             print("DNS cache flushed.")
     except subprocess.CalledProcessError as e:
         print(f"Error flushing DNS cache: {e}")
-
 
 def add_website(website):
     with open(HOSTS_PATH, 'a') as file:
@@ -74,4 +76,5 @@ def main():
             print("Invalid action. Please enter '/add {website}', '/rem {website}', '/list', or '/exit'.")
 
 if __name__ == "__main__":
+    clear_screen()
     main()
