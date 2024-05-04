@@ -1,5 +1,6 @@
 import requests
 import subprocess
+import time
 
 def update_file_from_url(url, filename):
   subprocess.run(["taskkill", "/F", "/IM", "pythonw3.12.exe"])
@@ -15,7 +16,8 @@ def update_file_from_url(url, filename):
     print(f"File downloaded successfully: {filename}")
   except requests.exceptions.RequestException as e:
     print(f"Error downloading file: {e}")
-
+    
+  time.sleep(1)
   exec(open("main.pyw").read())
   
 
