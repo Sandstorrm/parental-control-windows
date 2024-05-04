@@ -1,11 +1,22 @@
 import os
+import subprocess
 
 HOSTS_PATH = r"C:\Windows\System32\drivers\etc\hosts"
+
+def flush_dns():
+    try:
+        result = subprocess.run(["ipconfig", "/flushdns"], capture_output=True, text=True, check=True)
+        if "success" in result.stdout.lower():
+            print("DNS cache flushed.")
+    except subprocess.CalledProcessError as e:
+        print(f"Error flushing DNS cache: {e}")
+
 
 def add_website(website):
     with open(HOSTS_PATH, 'a') as file:
         file.write(f"10.0.0.1 {website}\n")
     print(f"{website} has been added to the hosts file.")
+    flush_dns()
 
 def remove_website(website):
     lines = []
@@ -22,6 +33,7 @@ def remove_website(website):
 
     if website_found:
         print(f"{website} has been removed from the hosts file.")
+        flush_dns()
     else:
         print(f"{website} was not found in the hosts file.")
 
