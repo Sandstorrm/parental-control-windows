@@ -3,5 +3,5 @@
     "success_delay": 10,
     "failed_delay": 5,
     "failed_command": "taskkill /f /im javaw.exe",
-    "relative_path": "doom.txt"
+    "points_file": "doom.txt"
 }

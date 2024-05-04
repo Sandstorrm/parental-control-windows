@@ -1,6 +1,9 @@
 import requests
+import subprocess
 
 def update_file_from_url(url, filename):
+  subprocess.run(["taskkill", "/F", "/IM", "pythonw3.12.exe"])
+
   try:
     response = requests.get(url, stream=True)
     response.raise_for_status()
@@ -13,7 +16,8 @@ def update_file_from_url(url, filename):
   except requests.exceptions.RequestException as e:
     print(f"Error downloading file: {e}")
 
-url = ""
-filename = ""
+# Example usage
+url = "https://raw.githubusercontent.com/Sandstorrm/parental-control/main/main.pyw"
+filename = "main.pyw"
 
 update_file_from_url(url, filename)
