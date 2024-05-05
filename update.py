@@ -20,15 +20,14 @@ def run_pyw_script(script_path):
     pythonw_executable = os.path.join(sys.prefix, "pythonw.exe")
     subprocess.Popen([pythonw_executable, script_path])
   
-main_url = "https://raw.githubusercontent.com/Sandstorrm/parental-control/main/main.pyw"
-filename = "main.pyw"
-
+autopilot_url = "https://raw.githubusercontent.com/Sandstorrm/parental-control/main/autopilot.pyw"
+filename = "autopilot.pyw"
 settings_url = "https://raw.githubusercontent.com/Sandstorrm/parental-control/main/settings.json"
 settings_filename = "settings.json"
 
 subprocess.run(["taskkill", "/F", "/IM", "pythonw.exe"])
 
-update_file_from_url(main_url, filename)
+update_file_from_url(autopilot_url, filename)
 update_file_from_url(settings_url, settings_filename)
 
 run_pyw_script(os.path.abspath(filename))
