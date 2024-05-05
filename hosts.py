@@ -63,6 +63,7 @@ def main():
                 add_website(website)
             else:
                 print("Please provide a website to add.")
+
         elif action.startswith("/rem"):
             parts = action.split()
             if len(parts) > 1:
@@ -70,10 +71,12 @@ def main():
                 remove_website(website)
             else:
                 print("Please provide a website to remove.")
+
         elif action == "/list":
             list_blocked_websites()
+            
         else:
-            print("Invalid action. Please enter '/add {website}', '/rem {website}', '/list', or '/exit'.")
+            print("Invalid command. Please enter /add {website}, /rem {website}, /list, or /exit.")
 
 if __name__ == "__main__":
     clear_screen()

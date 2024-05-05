@@ -8,6 +8,10 @@ startupinfo.dwFlags |= subprocess.STARTF_USESHOWWINDOW
 
 def Count():
     count = 0
+    if not os.path.exists(points_file):
+        with open(points_file, 'w', encoding='utf-16'):
+            print('Points file created.')
+
     with open(points_file, 'r', encoding='utf-16') as file:
         for line in file:
             if current_date in line:

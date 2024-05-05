@@ -17,7 +17,7 @@ def update_file_from_url(url, filename):
     print(f"Error downloading file: {e}")
 
 def run_pyw_script(script_path):
-    pythonw_executable = os.path.join(sys.prefix, "pythonw.exe")
+    pythonw_executable = os.path.join(sys.prefix, "pythonw3.12.exe")
     subprocess.Popen([pythonw_executable, script_path])
   
 autopilot_url = "https://raw.githubusercontent.com/Sandstorrm/parental-control/main/autopilot.pyw"
@@ -34,3 +34,13 @@ update_file_from_url(settings_url, settings_file)
 update_file_from_url(hosts_url, hosts_file)
 
 run_pyw_script(os.path.abspath(autopilot_file))
+
+
+import subprocess
+import sys, os
+
+def run_pyw_script(script_path):
+    pythonw_executable = os.path.join(sys.prefix, "pythonw.exe")
+    subprocess.Popen([pythonw_executable, script_path])
+
+run_pyw_script(os.path.abspath("autopilot.pyw"))
