@@ -4,6 +4,11 @@ import time
 import json
 import os
 
+pid = os.getpid()
+print("pid: " + pid)
+with open('process', 'w') as file:
+    file.write(str(pid))
+
 startupinfo = subprocess.STARTUPINFO()
 startupinfo.dwFlags |= subprocess.STARTF_USESHOWWINDOW
 
