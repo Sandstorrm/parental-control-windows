@@ -5,12 +5,14 @@
 To install, you can use the following commands:
 
 ```bash
-curl -o install.py https://raw.githubusercontent.com/Sandstorrm/parental-control/main/install.py
+git clone <URL to this repo>
 ```
 ```bash
-python install.py
+cd parental-control
 ```
 
 ## Usage
 
-Haven't figured this part out yet ¯\\\_(ツ)\_/¯
+```bash
+python main.py
+```
