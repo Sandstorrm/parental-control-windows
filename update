@@ -1,0 +1,9 @@
+import os
+import subprocess
+
+command = 'tasklist | findstr /i "python" | ForEach-Object { taskkill /F /PID ($($_ -split \'\\s+\')[1]) }'
+
+subprocess.run(['powershell.exe', '-Command', command], shell=True)
+os.system('rm -r -Force parental-control')
+os.system('git clone https://github.com/Sandstorrm/parental-control.git')
+print('done')
