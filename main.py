@@ -39,5 +39,7 @@ while True:
         exec(open('hosts.py').read())
     elif command == '/settings':
         exec(open('settings.py').read())
+    elif command == '/exit':
+        break
     else:
         print("Invalid command. Please enter /points, /hosts, /settings or /exit.")
