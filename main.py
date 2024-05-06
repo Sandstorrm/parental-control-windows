@@ -29,7 +29,7 @@ points_file = settings['points_file']
 current_date = datetime.datetime.now().strftime("%m/%d/%y")
 
 clear_screen()
-print(f'Points: {Count()}/{expected_points}')
+print('Valid commands: /points, /hosts, /settings, /help and /exit.')
 
 while True:
     command = input('PC> ')
@@ -39,6 +39,13 @@ while True:
         exec(open('hosts.py').read())
     elif command == '/settings':
         exec(open('settings.py').read())
+    elif command == '/help':
+        print('Valid commmands:')
+        print('/points - Show current points.')
+        print('/hosts - Add or remove websites from the hosts file.')
+        print('/settings - Change settings.')
+        print('/help - Show this message.')
+        print('/exit - Exit the program.')
     elif command == '/exit':
         break
     else:

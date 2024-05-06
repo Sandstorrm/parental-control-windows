@@ -20,17 +20,25 @@ def clear_screen():
 def main():
     settings = load_settings()
     clear_screen()
+    print('Valid commands: /points, /list, /add, /set, /rem, /help and /exit')
 
     while True:
-        action = input("SETTINGS: ")
+        action = input("SETTINGS> ")
 
         if action == "/exit":
             break
-
         elif action == "/list":
             print("Current Settings:")
             for key, value in settings.items(): print(f"{key}: {value}")
-
+        elif action == "/help":
+            print("Valid commands:")
+            print("/points - Show current points.")
+            print("/list - Show current settings.")
+            print("/set <key> <value> - Set a setting.")
+            print("/add <key> <value> - Add a setting.")
+            print("/rem <key> - Remove a setting.")
+            print("/help - Show this message.")
+            print("/exit - Exit the program.")
         elif action.startswith("/set"):
             parts = action.split()
             if len(parts) == 3:
@@ -40,7 +48,6 @@ def main():
                 print(f"Setting '{key}' set to '{value}'.")
             else:
                 print("Invalid format. Use '/set <key> <value>'.")
-
         elif action.startswith("/add"):
             parts = action.split()
             if len(parts) == 3:
@@ -53,7 +60,6 @@ def main():
                     print(f"Setting '{key}' added.")
             else:
                 print("Invalid format. Use '/add <key> <value>'.")
-
         elif action.startswith("/points"):
             parts = action.split()
             if len(parts) == 2:
@@ -63,7 +69,6 @@ def main():
                 print(f"Points set to {value}.")
             else:
                 print("Invalid format. Use '/points <value>'.")      
-
         elif action.startswith("/rem"):
             parts = action.split()
             if len(parts) == 2:
@@ -76,7 +81,6 @@ def main():
                     print(f"Setting '{key}' not found.")
             else:
                 print("Invalid format. Use '/remove <key>'.")
-
         else:
             print("Invalid command. Please enter /points, /set, /rem, /list, or /exit.")
 

@@ -50,20 +50,28 @@ def list_blocked_websites():
         print(website)
 
 def main():
+    print('Valid commands: /list, /add, /rem, /help and /exit.')
     while True:
-        action = input("HOSTS: ")
+        action = input("HOSTS> ")
 
         if action == "/exit":
             break
-
-        if action.startswith("/add"):
+        elif action == "/list":
+            list_blocked_websites()
+        elif action == "/help":
+            print('Valid commands:')
+            print('/list - List blocked websites.')
+            print('/add - Add a website to the hosts file.')
+            print('/rem - Remove a website from the hosts file.')
+            print('/help - Show this message.')
+            print('/exit - Exit the program.')
+        elif action.startswith("/add"):
             parts = action.split()
             if len(parts) > 1:
                 website = parts[1]
                 add_website(website)
             else:
                 print("Please provide a website to add.")
-
         elif action.startswith("/rem"):
             parts = action.split()
             if len(parts) > 1:
@@ -71,10 +79,6 @@ def main():
                 remove_website(website)
             else:
                 print("Please provide a website to remove.")
-
-        elif action == "/list":
-            list_blocked_websites()
-            
         else:
             print("Invalid command. Please enter /add {website}, /rem {website}, /list, or /exit.")
 
