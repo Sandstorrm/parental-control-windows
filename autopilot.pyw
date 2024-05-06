@@ -5,7 +5,7 @@ import json
 import os
 
 pid = os.getpid()
-print("pid: " + pid)
+print("pid: " + int(pid))
 with open('process', 'w') as file:
     file.write(str(pid))
 
