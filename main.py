@@ -64,6 +64,18 @@ while True:
                     pid = int(file.read())
                     subprocess.run(["powershell.exe", "-Command", f"taskkill /F /PID {pid}"], shell=True)
                     print('Autopilot disabled.')
+            elif command == 'status':
+                try:
+                    with open('process', 'r') as file:
+                        pid = int(file.read())
+                    result = subprocess.run(["tasklist", "/FI", f"PID eq {pid}"], capture_output=True, text=True)
+                    if "python" in result.stdout:
+                        print(f"Autopilot is running with PID {pid}")
+                    else:
+                        print("Autopilot is not running")
+                except FileNotFoundError:
+                    print("Autopilot is not running")
+                
             else:
                 print("Invalid command. Use '/autopilot on/off'.")
         else:
