@@ -12,16 +12,29 @@ def clear_screen():
 
 def Count():
     count = 0
+    points_file = 'points.txt'
     if not os.path.exists(points_file):
-        with open(points_file, 'w', encoding='utf-16'):
+        with open(points_file, 'w'):
             print('Points file created.')
 
-    with open(points_file, 'r', encoding='utf-16') as file:
-        for line in file:
-            if current_date in line:
-                count += 1
-    return count
+    today = datetime.date.today()
+    yesterday = today - datetime.timedelta(days=1)
+    current_date = today.strftime('%m/%d/%y')
+    yesterday_date = yesterday.strftime('%m/%d/%y')
 
+    with open(points_file, 'r') as file:
+        for line in file:
+            date_time_str = line.strip()
+            if current_date in date_time_str:
+                count += 1
+
+            if  yesterday_date in date_time_str:
+                date_part, time_part = date_time_str.split(' - ')
+                hour, minute_part = time_part.split(':')
+                minute, period = minute_part.split()
+                if period == 'PM' and int(hour) >= 10:
+                    count += 1
+    return count
 
 settings = load_settings()
 expected_points = settings['threshold']
