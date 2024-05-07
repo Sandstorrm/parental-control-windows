@@ -28,7 +28,7 @@ def remove_website(website):
 
     with open(HOSTS_PATH, 'w') as file:
         for line in lines:
-            if line.startswith(f"10.0.0.1 {website}" or line.startswith("192.178.50.78")):
+            if line.startswith(f"10.0.0.1 {website}" or line.startswith(f"192.178.50.78 {website}")):
                 website_found = True
             else:
                 file.write(line)
