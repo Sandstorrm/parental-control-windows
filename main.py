@@ -22,7 +22,7 @@ def Count():
     current_date = today.strftime('%m/%d/%y')
     yesterday_date = yesterday.strftime('%m/%d/%y')
 
-    with open(points_file, 'r') as file:
+    with open(points_file, 'r', encoding='utf-16') as file:
         for line in file:
             date_time_str = line.strip()
             if current_date in date_time_str:
