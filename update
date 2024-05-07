@@ -1,14 +1,29 @@
-import os
-import subprocess
-import time
+import os, subprocess
+
+script_dir = os.path.dirname(os.path.abspath(__file__))
+parent_dir = os.path.abspath(os.path.join(script_dir, os.pardir))
+file_path = os.path.join(parent_dir, 'update.temp')
+
+file_content = '''import os,subprocess,time
 
 current_pid = os.getpid()
 
-command = f"tasklist | findstr /i \"python\" | ForEach-Object {{ if ($($_ -split '\\s+')[1] -ne {current_pid}) {{ taskkill /F /PID ($($_ -split '\\s+')[1]) }} }}"
+command = f"tasklist | findstr /i \\"python\\" | ForEach-Object {{ if ($($_ -split '\\s+')[1] -ne {current_pid}) {{ taskkill /F /PID ($($_ -split '\\s+')[1]) }} }}"
 subprocess.run(['powershell.exe', '-Command', command], shell=True)
 time.sleep(1)
 command = "rm -r -Force parental-control"
 subprocess.run(['powershell.exe', '-Command', command], shell=True)
+print('deleting old version')
 time.sleep(1)
 os.system('git clone https://github.com/Sandstorrm/parental-control.git')
-print('done')
+script_path = os.path.abspath(__file__)
+os.remove(script_path)
+print('update.temp file deleted')
+print('done')'''
+
+print(f'creating update.temp in {parent_dir}')
+with open(file_path, 'w') as file:
+    file.write(file_content)
+
+print('running update.temp')
+subprocess.run(["powershell.exe", "-Command", f"Start-Process python -ArgumentList '{file_path}' -WindowStyle Hidden"], shell=True)
