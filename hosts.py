@@ -28,7 +28,7 @@ def remove_website(website):
 
     with open(HOSTS_PATH, 'w') as file:
         for line in lines:
-            if line.startswith(f"10.0.0.1 {website}"):
+            if line.startswith(f"10.0.0.1 {website}" or line.startswith("192.178.50.78")):
                 website_found = True
             else:
                 file.write(line)
@@ -43,7 +43,7 @@ def list_blocked_websites():
     blocked_websites = []
     with open(HOSTS_PATH, 'r') as file:
         lines = file.readlines()
-        blocked_websites = [line.split()[1] for line in lines if line.startswith("10.0.0.1")]
+        blocked_websites = [line.split()[1] for line in lines if line.startswith("10.0.0.1") or line.startswith("192.178.50.78")]
 
     print("Blocked websites:")
     for website in blocked_websites:
