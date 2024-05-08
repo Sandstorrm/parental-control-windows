@@ -83,7 +83,7 @@ while True:
     elif command == '/update':
         print("Updating...")
         time.sleep(1)
-        subprocess.run(["powershell.exe", "-Command", "python update.py"], shell=True)
+        subprocess.run(["powershell.exe", "-Command", "python update"], shell=True)
     elif command == '/help':
         print('Valid commmands:')
         print('/points - Show current points.')
