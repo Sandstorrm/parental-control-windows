@@ -9,13 +9,14 @@ file_content = '''import os,subprocess,time
 current_pid = os.getpid()
 
 command = f"tasklist | findstr /i \\"python\\" | ForEach-Object {{ if ($($_ -split '\\s+')[1] -ne {current_pid}) {{ taskkill /F /PID ($($_ -split '\\s+')[1]) }} }}"
+print('killing other instances of python')
 subprocess.run(['powershell.exe', '-Command', command], shell=True)
 time.sleep(1)
 command = "rm -r -Force parental-control"
-subprocess.run(['powershell.exe', '-Command', command], shell=True)
 print('deleting old version')
+subprocess.run(['powershell.exe', '-Command', command], shell=True)
 time.sleep(1)
-os.system('git clone https://github.com/Sandstorrm/parental-control.git')
+subprocess.run(['powershell.exe', '-Command', "git clone https://github.com/Sandstorrm/parental-control.git"], shell=True)
 script_path = os.path.abspath(__file__)
 os.remove(script_path)
 print('update.temp file deleted')
