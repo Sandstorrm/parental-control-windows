@@ -1,4 +1,4 @@
-import json, datetime, os, subprocess
+import json, datetime, os, subprocess, time
 
 def load_settings():
     if os.path.exists('settings.json'):
@@ -42,7 +42,7 @@ points_file = settings['points_file']
 current_date = datetime.datetime.now().strftime("%m/%d/%y")
 
 clear_screen()
-print('Valid commands: /points, /hosts, /settings, /autopilot, /help and /exit.')
+print('Valid commands: /points, /hosts, /settings, /autopilot, /update, /help and /exit.')
 
 while True:
     command = input('PC> ')
@@ -80,15 +80,20 @@ while True:
                 print("Invalid command. Use '/autopilot on/off'.")
         else:
             print("Invalid command. Use '/autopilot on/off'.")
+    elif command == '/update':
+        print("Updating...")
+        time.sleep(1)
+        subprocess.run(["powershell.exe", "-Command", "python update.py"], shell=True)
     elif command == '/help':
         print('Valid commmands:')
         print('/points - Show current points.')
         print('/hosts - Add or remove websites from the hosts file.')
         print('/settings - Change settings.')
         print('/autopilot - Enable or disable autopilot.')
+        print('/update - Update the program.')
         print('/help - Show this message.')
         print('/exit - Exit the program.')
     elif command == '/exit':
         break
     else:
-        print("Invalid command. Please enter /points, /hosts, /settings, /autopilot, /help and /exit.")
+        print("Invalid command. Please enter /points, /hosts, /settings, /autopilot, /update, /help and /exit.")
