@@ -2,6 +2,13 @@
 
 ## Installation
 
+### Dependencies
+
+- Git - [Download](https://git-scm.com/download/win)
+- Python - [Download](https://www.python.org/downloads/)
+
+### The easy part
+
 To install, you can use the following commands:
 
 ```bash
