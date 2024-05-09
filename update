@@ -9,7 +9,7 @@ import subprocess
 import time
 
 current_pid = os.getpid()
-command = f"tasklist | findstr /i \"python\" | ForEach-Object {{ if ($($_ -split '\s+')[1] -ne {current_pid}) {{ taskkill /F /PID ($($_ -split '\s+')[1]) }} }}"
+command = f"tasklist | findstr /i \\"python\\" | ForEach-Object {{ if ($($_ -split '\s+')[1] -ne {current_pid}) {{ taskkill /F /PID ($($_ -split '\s+')[1]) }} }}"
 print('killing all python processes')
 subprocess.run(['powershell.exe', '-Command', command], shell=True)
 time.sleep(1)
