@@ -5,7 +5,7 @@
 To install, you can use the following commands:
 
 ```bash
-git clone <URL to this repo>
+git clone https://github.com/Sandstorrm/parental-control.git
 ```
 ```bash
 cd parental-control
