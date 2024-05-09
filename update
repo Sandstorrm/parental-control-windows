@@ -9,11 +9,11 @@ import subprocess
 import time
 
 current_pid = os.getpid()
-command = f"tasklist | findstr /i \\"python\\" | ForEach-Object {{ if ($($_ -split '\s+')[1] -ne {current_pid}) {{ taskkill /F /PID ($($_ -split '\s+')[1]) }} }}"
+command = f"tasklist | findstr /i \"python\" | ForEach-Object {{ if ($($_ -split '\\s+')[1] -ne {current_pid}) {{ taskkill /F /PID ($($_ -split '\\s+')[1]) }} }}"
 print('killing all python processes')
 subprocess.run(['powershell.exe', '-Command', command], shell=True)
 time.sleep(1)
-command = 'rm -r -Force "$PWD/parental-control"'
+command = "rm -r -Force parental-control"
 print('removing parental-control')
 subprocess.run(['powershell.exe', '-Command', command], shell=True)
 print('cloning parental-control')
@@ -24,6 +24,5 @@ print('done')'''
 print(f'creating update.temp in {parent_dir}')
 with open(file_path, 'w') as file:
     file.write(file_content)
-
 print('running update.temp')
 subprocess.run(["powershell.exe", "-Command", f"Start-Process python -ArgumentList '{file_path}' -WindowStyle Hidden"], shell=True)
