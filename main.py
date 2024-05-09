@@ -42,7 +42,6 @@ def Help():
     print('/hosts - Add or remove websites from the hosts file.')
     print('/settings - Change settings.')
     print('/autopilot - Enable, disable or check the status of autopilot.')
-    print('/update - Update the program.')
     print('/help - Show this message.')
     print('/exit - Exit the program.')
 
@@ -75,7 +74,7 @@ points_file = settings['points_file']
 current_date = datetime.datetime.now().strftime("%m/%d/%y")
 
 clear_screen()
-print('Valid commands: /points, /hosts, /settings, /autopilot, /update, /help and /exit.')
+print('Valid commands: /points, /hosts, /settings, /autopilot, /help and /exit.')
 
 while True:
     command = input('PC> ')
@@ -90,10 +89,7 @@ while True:
     elif command.startswith('/autopilot'):
         parts = command.split(' ')
         Autopilot(parts[1])
-    elif command == '/update':
-        print("Updating...")
-        subprocess.run(["powershell.exe", "-Command", "python update"], shell=True)
     elif command == '/exit':
         break
     else:
-        print("Invalid command. Please enter /points, /hosts, /settings, /autopilot, /update, /help and /exit.")
+        print("Invalid command. Please enter /points, /hosts, /settings, /autopilot, /help and /exit.")
