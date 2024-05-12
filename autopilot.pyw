@@ -12,9 +12,8 @@ with open('process', 'w') as file:
 startupinfo = subprocess.STARTUPINFO()
 startupinfo.dwFlags |= subprocess.STARTF_USESHOWWINDOW
 
-def Count():
+def Count(points_file):
     count = 0
-    points_file = 'points.txt'
     if not os.path.exists(points_file):
         with open(points_file, 'w'):
             print('Points file created.')
@@ -46,7 +45,7 @@ while True:
     failed_delay = settings['failed_delay']
     failed_command = settings['failed_command']
     points_file = settings['points_file']
-    count = int(Count())
+    count = int(Count(points_file))
 
     if count >= threshold:
         print(f"Done with: {count}")
