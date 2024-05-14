@@ -1,5 +1,20 @@
 import json, datetime, os, subprocess
 
+def startup_path():
+    root = os.path.expanduser('~')
+    startup_path = os.path.join(root, 'AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup')
+    return startup_path
+
+def autopilot_startup_batch(args):
+    here = os.path.dirname(os.path.realpath(__file__))
+    if args == 'add':
+        with open(os.path.join(startup_path(), 'autopilot.bat'), 'w') as file:
+            file.write(f'cd {here}\nstart python autopilot.pyw')
+    elif args == 'rem':
+        os.remove(os.path.join(startup_path(), 'autopilot.bat'))
+    else:
+        print('Invalid argument passed to autopilot_startup_batch(). Use "add" or "rem".')
+
 def load_settings():
     if os.path.exists('settings.json'):
         with open('settings.json', 'r') as f:
@@ -49,11 +64,15 @@ def Autopilot(args):
     if args == 'on':
         subprocess.run(["powershell.exe", "-Command", "Start-Process python -ArgumentList autopilot.pyw -WindowStyle Hidden"], shell=True)
         print('Autopilot enabled.')
+        autopilot_startup_batch('add')
     elif args == 'off':
         with open('process', 'r') as file:
             pid = int(file.read())
             subprocess.run(["powershell.exe", "-Command", f"taskkill /F /PID {pid}"], shell=True)
             print('Autopilot disabled.')
+            autopilot_startup_batch('rem')
+            with open('process', 'w') as file:
+                file.write('')
     elif args == 'status':
         try:
             with open('process', 'r') as file:
@@ -152,7 +171,7 @@ while True:
         exec(open('settings.py').read())
     elif command.startswith('/autopilot'):
         parts = command.split(' ')
-        Autopilot(parts[1])
+        Autopilot(parts[1])       
     elif command == '/exit':
         break
     else:
