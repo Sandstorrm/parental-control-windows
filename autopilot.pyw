@@ -1,16 +1,10 @@
-import datetime
-import subprocess
-import time
-import json
-import os
+import datetime, subprocess, time, json, os
 
-pid = os.getpid()
-print("pid: " + str(pid))
-with open('process', 'w') as file:
-    file.write(str(pid))
-
-startupinfo = subprocess.STARTUPINFO()
-startupinfo.dwFlags |= subprocess.STARTF_USESHOWWINDOW
+def insure_pid():
+    pid = os.getpid()
+    print("pid: " + str(pid))
+    with open('process', 'w') as file:
+        file.write(str(pid))
 
 def Count(points_file):
     count = 0
@@ -37,22 +31,36 @@ def Count(points_file):
                     count += 1
     return count
 
-while True:
-    current_date = datetime.datetime.now().strftime("%m/%d/%y")
-    with open('settings.json', 'r') as f: settings = json.load(f)
-    threshold = settings['threshold']
-    success_delay = settings['success_delay']
-    failed_delay = settings['failed_delay']
-    failed_command = settings['failed_command']
-    points_file = settings['points_file']
-    count = int(Count(points_file))
+def load_settings():
+    with open('settings.json', 'r') as f:
+        return json.load(f)
 
-    if count >= threshold:
-        print(f"Done with: {count}")
-        time.sleep(success_delay)
-    else:
-        print(f"Only {count}, Expected: {threshold}")
-        result = subprocess.Popen(["powershell", "-Command", failed_command], stdout=subprocess.PIPE, startupinfo=startupinfo)
-        output = result.communicate()[0].decode()
-        print(output)
-        time.sleep(failed_delay)
+def punish():
+    failed_command = load_settings()['failed_command']
+    startupinfo = subprocess.STARTUPINFO()
+    startupinfo.dwFlags |= subprocess.STARTF_USESHOWWINDOW
+    result = subprocess.Popen(["powershell", "-Command", failed_command], stdout=subprocess.PIPE, startupinfo=startupinfo)
+    output = result.communicate()[0].decode()
+    print(output)
+
+def main():
+    insure_pid()
+
+    while True:
+        settings = load_settings()
+        threshold = settings['threshold']
+        success_delay = settings['success_delay']
+        failed_delay = settings['failed_delay']
+        points_file = settings['points_file']
+        count = int(Count(points_file))
+
+        if count >= threshold:
+            print(f"Done with: {count}")
+            time.sleep(success_delay)
+        else:
+            print(f"Only {count}, Expected: {threshold}")
+            punish()
+            time.sleep(failed_delay)
+
+if __name__ == '__main__':
+    main()
