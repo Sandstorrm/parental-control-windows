@@ -45,11 +45,15 @@ def list_blocked_websites():
     blocked_websites = []
     with open(HOSTS_PATH, 'r') as file:
         lines = file.readlines()
-        blocked_websites = [line.split()[1] for line in lines if line.startswith("10.0.0.1") or line.startswith("192.178.50.78")]
+        for line in lines:
+            parts = line.strip().split()
+            if len(parts) >= 2 and (parts[0] == "10.0.0.1" or parts[0] == "192.178.50.78"):
+                blocked_websites.append(parts[1])
 
     print("Blocked websites:")
     for website in blocked_websites:
         print(website)
+
 
 def main():
     print('Valid commands: /list, /add, /rem, /help and /exit.')

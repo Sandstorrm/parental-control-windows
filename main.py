@@ -25,9 +25,8 @@ def load_settings():
 def clear_screen():
     os.system('cls' if os.name == 'nt' else 'clear')
 
-def Count():
+def Count(points_file):
     count = 0
-    points_file = 'points.txt'
     if not os.path.exists(points_file):
         with open(points_file, 'w'):
             print('Points file created.')
@@ -109,7 +108,7 @@ def Points(args):
             file.seek(0, 0)
             new_line = f'/ {current_date} - {datetime.datetime.now().strftime("%I:%M %p")}\n'
             file.write(new_line * number + content)
-        print(f'Now: {Count()}/{expected_points}')
+        print(f'Now: {Count(points_file)}/{expected_points}')
 
     elif command == 'rem':
         if len(args) < 2:
@@ -133,7 +132,7 @@ def Points(args):
                     remaining_lines.append(line)
             file.writelines(remaining_lines)
             file.truncate()
-        print(f'Now: {Count()}/{expected_points}')
+        print(f'Now: {Count(points_file)}/{expected_points}')
 
     elif command == 'list':
         count = 0
@@ -164,7 +163,7 @@ while True:
     elif command.startswith('/points'):
         parts = command.split(' ')
         if len(parts) >= 2: Points(parts[1:])
-        else: print(f'Points: {Count()}/{expected_points}')
+        else: print(f'Points: {Count(points_file)}/{expected_points}')
     elif command == '/hosts':
         exec(open('hosts.py').read())
     elif command == '/settings':
